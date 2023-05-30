@@ -6,7 +6,7 @@ namespace App7
 {
     public class Record
     {
-        public string fileName;
-        public int size;
+        public string fileName {get; set;}
+        public int size{get; set;}
     }
 }

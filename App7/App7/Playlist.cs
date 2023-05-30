@@ -1,35 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text;
 
 namespace App7
 {
-    public class Playlist
+    public class Playlist:INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string property)
+        private ObservableCollection<Record> allPlaylists;
+
+        public ObservableCollection<Record> AllPlaylists
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
+            get { return allPlaylists; }
+            set
+            {
+                allPlaylists = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(AllPlaylists)));
+            }
         }
 
-        public static List<Record> AllPlaylists { get; set; } = new List<Record>();
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public Playlist()
         {
             AllPlaylists = GetMockPlayList(10);
         }
 
-        private List<Record> GetMockPlayList(int k)
+        private ObservableCollection<Record> GetMockPlayList(int k)
         {
-            var list = new List<Record>();
+            var list = new ObservableCollection<Record>();
             for (int i = 0; i<k; i++)
             {
                 list.Add(new Record() { fileName = $"{i}", size = 2 * i }); ;
             }
             return list;
         }
-
     }
 }

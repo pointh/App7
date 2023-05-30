@@ -15,10 +15,5 @@ namespace App7
             InitializeComponent();
             BindingContext = new Playlist();
         }
-
-        private void Button_Clicked(object sender, EventArgs e)
-        {
-            ;
-        }
     }
 }
